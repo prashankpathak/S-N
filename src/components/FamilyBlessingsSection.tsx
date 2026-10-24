@@ -98,7 +98,7 @@ export const FamilyBlessingsSection: React.FC = () => {
           </p>
 
           <p className="font-mono text-xs text-[#dcd1bb] tracking-widest mt-1">
-            +91 7974698059 &nbsp;·&nbsp; +91 8319476160
+            +91 7974698059 &nbsp;·&nbsp; +91 8319746160
           </p>
 
           {/* Action buttons: Call and WhatsApp */}
@@ -113,11 +113,11 @@ export const FamilyBlessingsSection: React.FC = () => {
               </a>
 
               <a
-                href="tel:+918319476160"
+                href="tel:+918319746160"
                 className="min-h-[44px] px-3 py-2 rounded-xl bg-gradient-to-r from-[#d4af37] to-[#aa771c] text-[#241906] font-cinzel text-[10px] font-bold tracking-wider uppercase flex items-center justify-center gap-1.5 shadow-md active:scale-95 transition-transform"
               >
                 <Phone className="w-3.5 h-3.5" />
-                <span>Call 8319476160</span>
+                <span>Call 8319746160</span>
               </a>
             </div>
 
