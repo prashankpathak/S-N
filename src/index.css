@@ -1,0 +1,229 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --gold-primary: #c5a059;
+    --gold-light: #f3e5ab;
+    --gold-dark: #8b6b23;
+    --gold-foil: linear-gradient(135deg, #bf953f 0%, #fcf6ba 25%, #b38728 50%, #fbf5b7 75%, #aa771c 100%);
+    --silk-cream: #faf7f2;
+    --ivory-warm: #f5efe6;
+    --card-bg: #fffdfa;
+    --dark-gold: #382c16;
+  }
+
+  body {
+    background-color: #0d0c0a;
+    color: #2e261f;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+}
+
+.font-cinzel {
+  font-family: 'Cinzel', serif;
+}
+
+.font-cormorant {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+}
+
+.font-vibes {
+  font-family: 'Great Vibes', cursive;
+}
+
+.font-playfair {
+  font-family: 'Playfair Display', Georgia, serif;
+}
+
+.font-sans {
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* Ultra-Bold, Shining Royal 24K Gold Foil Gradients for Supreme Visibility */
+.text-gold-shining {
+  background: linear-gradient(135deg, #703800 0%, #b86e00 15%, #e69100 28%, #ffd700 42%, #fff3a3 50%, #ffc000 62%, #d97706 78%, #783500 100%);
+  background-size: 250% auto;
+  animation: goldShimmerSweep 5s ease-in-out infinite;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 1.5px 2px rgba(85, 38, 0, 0.75)) drop-shadow(0 0 8px rgba(255, 193, 7, 0.4));
+  -webkit-text-stroke: 0.4px rgba(105, 45, 0, 0.4);
+}
+
+.text-gold-radiant {
+  background: linear-gradient(135deg, #703800 0%, #b86e00 15%, #e69100 30%, #ffd700 45%, #fff5aa 55%, #ffb700 70%, #c46d00 85%, #6e3200 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 1.5px 2px rgba(90, 40, 0, 0.7)) drop-shadow(0 0 6px rgba(245, 158, 11, 0.35));
+  -webkit-text-stroke: 0.35px rgba(105, 45, 0, 0.4);
+}
+
+.text-gold-foil {
+  background: linear-gradient(135deg, #783e00 0%, #d97706 20%, #ffd700 45%, #fff8c4 55%, #d97706 75%, #783500 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 1px 1.5px rgba(100, 45, 0, 0.5));
+}
+
+.text-gold-bright {
+  background: linear-gradient(135deg, #854000 0%, #ea580c 20%, #ffd700 50%, #fffde0 65%, #f59e0b 85%, #7c2d12 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 1px 2px rgba(95, 40, 0, 0.6));
+}
+
+.text-gold-subtle {
+  background: linear-gradient(135deg, #92400e 0%, #d97706 50%, #78350f 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+@keyframes goldShimmerSweep {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+/* Gold border gradients */
+.border-gold-foil {
+  border-image: linear-gradient(135deg, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c) 1;
+}
+
+/* Deckle Edge Paper Simulation */
+.deckle-paper {
+  background-color: #fffdf9;
+  background-image: 
+    radial-gradient(circle at 50% 50%, rgba(245, 237, 222, 0.4) 0%, rgba(235, 224, 204, 0.2) 100%),
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E");
+  box-shadow: 
+    0 4px 20px -2px rgba(35, 25, 10, 0.12),
+    0 1px 3px rgba(35, 25, 10, 0.08),
+    inset 0 0 40px rgba(212, 175, 55, 0.05);
+}
+
+/* Pearl Brooch Effect */
+.pearl-bead {
+  background: radial-gradient(circle at 35% 30%, #ffffff 0%, #fefcf7 30%, #ebe2d3 70%, #c4b59d 100%);
+  box-shadow: 
+    inset -1px -2px 4px rgba(160, 140, 110, 0.6),
+    inset 1px 2px 3px rgba(255, 255, 255, 0.9),
+    0 2px 5px rgba(0, 0, 0, 0.25);
+}
+
+.pearl-brooch-core {
+  background: radial-gradient(circle at 35% 30%, #ffffff 0%, #fff9ec 25%, #eddcc2 60%, #baa380 90%, #8f7959 100%);
+  box-shadow: 
+    inset -2px -4px 8px rgba(120, 95, 60, 0.5),
+    inset 2px 4px 6px rgba(255, 255, 255, 0.95),
+    0 6px 16px rgba(0, 0, 0, 0.35);
+}
+
+/* Wax Seal Styling */
+.wax-seal {
+  background: radial-gradient(circle at 35% 30%, #d84315 0%, #bf360c 40%, #870000 85%, #4e0000 100%);
+  box-shadow: 
+    inset -2px -3px 6px rgba(0, 0, 0, 0.6),
+    inset 2px 3px 6px rgba(255, 160, 130, 0.6),
+    0 8px 24px rgba(78, 0, 0, 0.45);
+}
+
+.wax-seal-gold {
+  background: radial-gradient(circle at 35% 30%, #ffd54f 0%, #ffb300 35%, #b27b00 75%, #664600 100%);
+  box-shadow: 
+    inset -2px -3px 6px rgba(70, 45, 0, 0.7),
+    inset 2px 3px 6px rgba(255, 255, 230, 0.9),
+    0 8px 24px rgba(102, 70, 0, 0.4);
+}
+
+/* 3D Gate Perspective */
+.gate-perspective {
+  perspective: 1400px;
+  perspective-origin: center center;
+}
+
+.door-left {
+  transform-origin: left center;
+  transition: transform 1.6s cubic-bezier(0.25, 1, 0.35, 1), opacity 0.8s ease;
+  transform-style: preserve-3d;
+}
+
+.door-right {
+  transform-origin: right center;
+  transition: transform 1.6s cubic-bezier(0.25, 1, 0.35, 1), opacity 0.8s ease;
+  transform-style: preserve-3d;
+}
+
+.door-left.open {
+  transform: rotateY(-118deg);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.door-right.open {
+  transform: rotateY(118deg);
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Shimmer Keyframes */
+@keyframes goldShine {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+.animate-gold-shine {
+  background-size: 200% auto;
+  animation: goldShine 6s linear infinite;
+}
+
+@keyframes gentleFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+.animate-float {
+  animation: gentleFloat 4s ease-in-out infinite;
+}
+
+@keyframes pulseSubtle {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
+  }
+  50% {
+    transform: scale(1.02);
+    box-shadow: 0 0 25px rgba(212, 175, 55, 0.6);
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulseSubtle 3s ease-in-out infinite;
+}
+
+/* Custom scrollbar for mobile container */
+::-webkit-scrollbar {
+  width: 5px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(30, 25, 20, 0.05);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(197, 160, 89, 0.4);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(197, 160, 89, 0.7);
+}

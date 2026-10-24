@@ -1,0 +1,6 @@
+{
+  "name": "Samarthya & Nikita | Wedding Invitation",
+  "description": "An ultra-luxury interactive digital royal Christian wedding invitation for Samarthya Solomon Selot and Nikita Martin.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
