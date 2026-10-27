@@ -67,14 +67,7 @@ export const CountdownSection: React.FC = () => {
               </linearGradient>
             </defs>
 
-            {/* Delicate gold string */}
-            <path
-              d="M 25,80 C 25,30 315,30 315,80 C 315,130 25,130 25,80 Z"
-              stroke="url(#silkRibbon)"
-              strokeWidth="1.5"
-              strokeDasharray="3 3"
-              opacity="0.6"
-            />
+            {/* Pearl necklace arrangement without overlapping line */}
 
             {/* Individual Lustrous Pearls arranged along the oval necklace curve */}
             {(() => {

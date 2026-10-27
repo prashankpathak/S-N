@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { WeddingEvent } from '../types/wedding';
 import { downloadIcsFile, getGoogleCalendarUrl } from '../utils/calendar';
 import { GoldDivider } from './OrnateFrame';
-import { Calendar, MapPin, Clock, ExternalLink, Download, Sparkles, Check } from 'lucide-react';
+import { Calendar, MapPin, Clock, ExternalLink, Download, Check } from 'lucide-react';
 
 const weddingEventsData: WeddingEvent[] = [
   {
@@ -31,17 +31,6 @@ const weddingEventsData: WeddingEvent[] = [
     venue: 'West Elizey, Shawn Elizey',
     venueAddress: 'Jabalpur, Madhya Pradesh',
     googleMapsUrl: 'https://maps.google.com/?q=Shawn+Elizey+Jabalpur',
-    dressCode: {
-      theme: 'A Symphony of Yellows',
-      description: 'Bright, cheerful shades of mustard, sunshine, ochre and lemon silks.',
-      swatches: [
-        { name: 'Marigold Gold', hex: '#F59E0B' },
-        { name: 'Sunshine Ochre', hex: '#EAB308' },
-        { name: 'Mustard Silk', hex: '#D97706' },
-        { name: 'Lemon Chiffon', hex: '#FEF08A' },
-        { name: 'Raw Turmeric', hex: '#B45309' },
-      ],
-    },
   },
   {
     id: 'event-sangeet',
@@ -55,17 +44,6 @@ const weddingEventsData: WeddingEvent[] = [
     venue: 'East Elizey, Shawn Elizey',
     venueAddress: 'Jabalpur, Madhya Pradesh',
     googleMapsUrl: 'https://maps.google.com/?q=Shawn+Elizey+Jabalpur',
-    dressCode: {
-      theme: 'Shimmer, Shine & Sparkle',
-      description: 'Glittering evening couture with metallic accents and sequined glamour.',
-      swatches: [
-        { name: 'Champagne Gold', hex: '#E6C280', sparkle: true },
-        { name: 'Rose Gold Glitz', hex: '#B76E79', sparkle: true },
-        { name: 'Midnight Sparkle', hex: '#1E293B', sparkle: true },
-        { name: 'Silver Starlight', hex: '#CBD5E1', sparkle: true },
-        { name: 'Deep Bronze', hex: '#78350F', sparkle: true },
-      ],
-    },
   },
   {
     id: 'event-matrimony',
@@ -98,12 +76,6 @@ const weddingEventsData: WeddingEvent[] = [
 ];
 
 export const EventsTimeline: React.FC = () => {
-  const [selectedSwatch, setSelectedSwatch] = useState<{
-    eventName: string;
-    swatchName: string;
-    hex: string;
-  } | null>(null);
-
   const [copiedEventId, setCopiedEventId] = useState<string | null>(null);
 
   const handleDownloadAllIcs = () => {
@@ -127,35 +99,6 @@ export const EventsTimeline: React.FC = () => {
           Each sacred moment marked with joy, music, and divine blessings
         </p>
       </div>
-
-      {/* Swatch info banner if selected */}
-      {selectedSwatch && (
-        <div className="sticky top-4 z-30 mb-4 max-w-sm mx-auto p-3 rounded-xl bg-[#241c12] text-[#fbf5b7] border border-[#c5a059] shadow-xl flex items-center justify-between text-xs animate-fade-in">
-          <div className="flex items-center gap-2.5">
-            <div
-              className="w-5 h-5 rounded-full border border-white/60 shadow-sm shrink-0"
-              style={{ backgroundColor: selectedSwatch.hex }}
-            />
-            <div>
-              <p className="font-cinzel text-[10px] tracking-wider uppercase opacity-80">
-                {selectedSwatch.eventName} Palette
-              </p>
-              <p className="font-semibold text-white">
-                {selectedSwatch.swatchName}{' '}
-                <span className="font-mono text-[10px] opacity-75">
-                  ({selectedSwatch.hex})
-                </span>
-              </p>
-            </div>
-          </div>
-          <button
-            onClick={() => setSelectedSwatch(null)}
-            className="text-white/70 hover:text-white px-2 py-1 font-cinzel text-[10px]"
-          >
-            ✕
-          </button>
-        </div>
-      )}
 
       {/* Event Cards */}
       <div className="space-y-6 max-w-sm mx-auto">
@@ -216,50 +159,6 @@ export const EventsTimeline: React.FC = () => {
               <p className="font-cormorant italic text-xs text-[#6e5836] bg-[#fbf8f0] p-2.5 rounded-lg border border-[#e8dcbe] mt-3">
                 &ldquo;{event.note}&rdquo;
               </p>
-            )}
-
-            {/* Interactive Dress Code Swatches */}
-            {event.dressCode && (
-              <div className="mt-3.5 pt-3 border-t border-[#e8dcbe]/70">
-                <div className="flex items-center gap-1.5 mb-1.5">
-                  <Sparkles className="w-3.5 h-3.5 text-[#b38728]" />
-                  <span className="font-cinzel text-[10px] tracking-wider text-[#8c6b2b] uppercase font-bold">
-                    Dress Code: {event.dressCode.theme}
-                  </span>
-                </div>
-                <p className="font-cormorant italic text-[11px] text-[#5c4930] mb-2">
-                  {event.dressCode.description}
-                </p>
-
-                {/* Swatch color circles */}
-                <div className="flex items-center gap-2 flex-wrap">
-                  {event.dressCode.swatches.map((swatch) => (
-                    <button
-                      key={swatch.name}
-                      onClick={() =>
-                        setSelectedSwatch({
-                          eventName: event.title,
-                          swatchName: swatch.name,
-                          hex: swatch.hex,
-                        })
-                      }
-                      title={`Tap to view: ${swatch.name}`}
-                      className="group relative flex items-center gap-1.5 pl-1 pr-2 py-1 rounded-full border border-[#c5a059]/40 bg-white/90 hover:bg-[#fffdf7] active:scale-95 transition-all shadow-xs"
-                      aria-label={`Color swatch for ${swatch.name}`}
-                    >
-                      <span
-                        className={`w-3.5 h-3.5 rounded-full border border-black/10 shrink-0 ${
-                          swatch.sparkle ? 'ring-1 ring-[#c5a059]/60' : ''
-                        }`}
-                        style={{ backgroundColor: swatch.hex }}
-                      />
-                      <span className="font-cinzel text-[9px] text-[#4d3b23] tracking-wide">
-                        {swatch.name}
-                      </span>
-                    </button>
-                  ))}
-                </div>
-              </div>
             )}
 
             {/* Action Bar: Google Maps & Add to Calendar */}

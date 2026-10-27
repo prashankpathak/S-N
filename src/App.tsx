@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { GateCover } from './components/GateCover';
 import { AudioControls } from './components/AudioControls';
+import { HolyScriptureSection } from './components/HolyScriptureSection';
+import { ScratchToRevealDate } from './components/ScratchToRevealDate';
 import { AnnouncementSection } from './components/AnnouncementSection';
 import { CountdownSection } from './components/CountdownSection';
 import { EventsTimeline } from './components/EventsTimeline';
@@ -45,7 +47,7 @@ export default function App() {
 
         {/* ================= HERO INVITATION CARD (DECKLE EDGE) ================= */}
         <main className="flex-1 pb-24">
-          <div className="p-4 sm:p-6 relative">
+          <div className="p-3 sm:p-5 relative">
             {/* Outer deckle paper border with gold rim */}
             <div className="deckle-paper relative p-4 sm:p-6 rounded-3xl border-2 border-[#c5a059]/40 shadow-xl overflow-hidden">
               {/* Corner Victorian flourishes on main card */}
@@ -59,22 +61,32 @@ export default function App() {
                 <MonogramBadge />
               </div>
 
-              {/* 1. Main Announcement & Bible Verse */}
+              {/* ================= 1. HOLY SCRIPTURE ================= */}
+              <HolyScriptureSection />
+
+              <GoldDivider className="my-6 opacity-70" />
+
+              {/* ================= 2. SCRATCH TO REVEAL THE DATE ================= */}
+              <ScratchToRevealDate />
+
+              <GoldDivider className="my-6 opacity-70" />
+
+              {/* ================= 3. INVITATION ("WITH A HEART FULL OF GRATITUDE") ================= */}
               <AnnouncementSection />
 
               <GoldDivider className="my-6 opacity-70" />
 
-              {/* 2. Live Countdown with Pearl Necklace Date */}
+              {/* ================= 4. COUNTDOWN ================= */}
               <CountdownSection />
 
               <GoldDivider className="my-6 opacity-70" />
 
-              {/* 3. Events Schedule & Itinerary */}
+              {/* ================= 5. EVENTS TIMELINE (NO DRESS CODE) ================= */}
               <EventsTimeline />
 
               <GoldDivider className="my-6 opacity-70" />
 
-              {/* 4. Blessings & Family Contact Information */}
+              {/* ================= 6. FAMILY BLESSINGS & CONTACT ================= */}
               <FamilyBlessingsSection />
 
               {/* Footer Note */}
@@ -108,6 +120,16 @@ export default function App() {
               <Sparkles className="w-4 h-4" />
               <span className="font-cinzel text-[9px] tracking-wider uppercase font-semibold">
                 Home
+              </span>
+            </button>
+
+            <button
+              onClick={() => scrollToSection('scratch-date')}
+              className="flex flex-col items-center gap-1 min-w-[56px] py-1 text-[#8c6b2b] hover:text-[#423218] active:scale-95 transition-transform"
+            >
+              <Sparkles className="w-4 h-4" />
+              <span className="font-cinzel text-[9px] tracking-wider uppercase font-semibold">
+                Date
               </span>
             </button>
 

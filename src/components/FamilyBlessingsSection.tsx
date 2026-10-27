@@ -97,12 +97,12 @@ export const FamilyBlessingsSection: React.FC = () => {
             Srishti Selot
           </p>
 
-          <p className="font-mono text-xs text-[#dcd1bb] tracking-widest mt-1">
-            +91 7974698059 &nbsp;·&nbsp; +91 8319746160
+          <p className="font-mono text-xs text-[#dcd1bb] tracking-widest mt-1.5 pb-1">
+            +91 7974698059 &nbsp;·&nbsp; +91 8989535612
           </p>
 
-          {/* Action buttons: Call and WhatsApp */}
-          <div className="mt-4 pt-3 border-t border-[#c5a059]/30 space-y-2">
+          {/* Action buttons: Call and WhatsApp (clean spacing, no overlapping border line) */}
+          <div className="mt-3 space-y-2.5">
             <div className="grid grid-cols-2 gap-2">
               <a
                 href="tel:+917974698059"
@@ -113,11 +113,11 @@ export const FamilyBlessingsSection: React.FC = () => {
               </a>
 
               <a
-                href="tel:+918319746160"
+                href="tel:+918989535612"
                 className="min-h-[44px] px-3 py-2 rounded-xl bg-gradient-to-r from-[#d4af37] to-[#aa771c] text-[#241906] font-cinzel text-[10px] font-bold tracking-wider uppercase flex items-center justify-center gap-1.5 shadow-md active:scale-95 transition-transform"
               >
                 <Phone className="w-3.5 h-3.5" />
-                <span>Call 8319746160</span>
+                <span>Call 8989535612</span>
               </a>
             </div>
 
