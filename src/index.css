@@ -94,16 +94,18 @@
   border-image: linear-gradient(135deg, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c) 1;
 }
 
-/* Deckle Edge Paper Simulation */
+/* Deckle Edge Paper Simulation (Optimized for 60fps buttery scrolling) */
 .deckle-paper {
   background-color: #fffdf9;
   background-image: 
-    radial-gradient(circle at 50% 50%, rgba(245, 237, 222, 0.4) 0%, rgba(235, 224, 204, 0.2) 100%),
-    url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E");
+    radial-gradient(circle at 50% 50%, rgba(245, 237, 222, 0.45) 0%, rgba(235, 224, 204, 0.25) 100%),
+    radial-gradient(circle at 10% 20%, rgba(212, 175, 55, 0.04) 0%, transparent 60%),
+    radial-gradient(circle at 90% 80%, rgba(212, 175, 55, 0.04) 0%, transparent 60%);
   box-shadow: 
     0 4px 20px -2px rgba(35, 25, 10, 0.12),
     0 1px 3px rgba(35, 25, 10, 0.08),
     inset 0 0 40px rgba(212, 175, 55, 0.05);
+  contain: layout style;
 }
 
 /* Pearl Brooch Effect */
@@ -113,6 +115,7 @@
     inset -1px -2px 4px rgba(160, 140, 110, 0.6),
     inset 1px 2px 3px rgba(255, 255, 255, 0.9),
     0 2px 5px rgba(0, 0, 0, 0.25);
+  transform: translateZ(0);
 }
 
 .pearl-brooch-core {
@@ -121,6 +124,7 @@
     inset -2px -4px 8px rgba(120, 95, 60, 0.5),
     inset 2px 4px 6px rgba(255, 255, 255, 0.95),
     0 6px 16px rgba(0, 0, 0, 0.35);
+  transform: translateZ(0);
 }
 
 /* Wax Seal Styling */
@@ -140,32 +144,41 @@
     0 8px 24px rgba(102, 70, 0, 0.4);
 }
 
-/* 3D Gate Perspective */
+/* 3D Gate Perspective with Zero-Jank Hardware Acceleration */
 .gate-perspective {
   perspective: 1400px;
   perspective-origin: center center;
+  transform: translateZ(0);
 }
 
 .door-left {
   transform-origin: left center;
-  transition: transform 1.6s cubic-bezier(0.25, 1, 0.35, 1), opacity 0.8s ease;
+  transition: transform 1.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.7s ease;
   transform-style: preserve-3d;
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transform: translateZ(0);
 }
 
 .door-right {
   transform-origin: right center;
-  transition: transform 1.6s cubic-bezier(0.25, 1, 0.35, 1), opacity 0.8s ease;
+  transition: transform 1.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.7s ease;
   transform-style: preserve-3d;
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transform: translateZ(0);
 }
 
 .door-left.open {
-  transform: rotateY(-118deg);
+  transform: rotateY(-118deg) translateZ(0);
   opacity: 0;
   pointer-events: none;
 }
 
 .door-right.open {
-  transform: rotateY(118deg);
+  transform: rotateY(118deg) translateZ(0);
   opacity: 0;
   pointer-events: none;
 }
