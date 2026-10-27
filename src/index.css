@@ -3,18 +3,18 @@
 @layer base {
   :root {
     --gold-primary: #c5a059;
-    --gold-light: #f3e5ab;
-    --gold-dark: #8b6b23;
-    --gold-foil: linear-gradient(135deg, #bf953f 0%, #fcf6ba 25%, #b38728 50%, #fbf5b7 75%, #aa771c 100%);
+    --gold-light: #fef3c7;
+    --gold-dark: #78350f;
+    --gold-foil: linear-gradient(135deg, #783e00 0%, #c28822 18%, #ffd700 42%, #fffbe0 52%, #d4a342 68%, #854907 88%, #c28822 100%);
     --silk-cream: #faf7f2;
-    --ivory-warm: #f5efe6;
-    --card-bg: #fffdfa;
+    --ivory-warm: #fcf9f2;
+    --card-bg: #fffdf9;
     --dark-gold: #382c16;
   }
 
   body {
-    background-color: #0d0c0a;
-    color: #2e261f;
+    background-color: #0b0a08;
+    color: #2b2116;
     font-family: 'Cormorant Garamond', Georgia, serif;
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
@@ -41,41 +41,44 @@
   font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
-/* Ultra-Bold, Shining Royal 24K Gold Foil Gradients for Supreme Visibility */
+/* ================= ULTRA-LUXURY 24K GOLD FOIL STYLING ================= */
+
+/* Supreme 24K Polished Gold Shimmer (For Groom, Bride, and Key Titles) */
 .text-gold-shining {
-  background: linear-gradient(135deg, #703800 0%, #b86e00 15%, #e69100 28%, #ffd700 42%, #fff3a3 50%, #ffc000 62%, #d97706 78%, #783500 100%);
-  background-size: 250% auto;
+  background: linear-gradient(135deg, #663300 0%, #a66500 12%, #df8b00 24%, #ffd700 40%, #fffbe6 50%, #ffc400 60%, #cc7200 76%, #703500 90%, #d49300 100%);
+  background-size: 240% auto;
   animation: goldShimmerSweep 5s ease-in-out infinite;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  filter: drop-shadow(0 1.5px 2px rgba(85, 38, 0, 0.75)) drop-shadow(0 0 8px rgba(255, 193, 7, 0.4));
-  -webkit-text-stroke: 0.4px rgba(105, 45, 0, 0.4);
+  filter: drop-shadow(0 1.5px 2px rgba(70, 32, 0, 0.75)) drop-shadow(0 0 10px rgba(255, 215, 0, 0.35));
+  -webkit-text-stroke: 0.35px rgba(90, 40, 0, 0.35);
 }
 
+/* Radiant Gold Foil (Section headings and highlights) */
 .text-gold-radiant {
-  background: linear-gradient(135deg, #703800 0%, #b86e00 15%, #e69100 30%, #ffd700 45%, #fff5aa 55%, #ffb700 70%, #c46d00 85%, #6e3200 100%);
+  background: linear-gradient(135deg, #663300 0%, #ad6800 15%, #e69100 30%, #ffd700 48%, #fffbe6 55%, #f59e0b 72%, #b45309 88%, #663300 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  filter: drop-shadow(0 1.5px 2px rgba(90, 40, 0, 0.7)) drop-shadow(0 0 6px rgba(245, 158, 11, 0.35));
-  -webkit-text-stroke: 0.35px rgba(105, 45, 0, 0.4);
+  filter: drop-shadow(0 1.5px 2px rgba(80, 36, 0, 0.65)) drop-shadow(0 0 6px rgba(245, 158, 11, 0.3));
 }
 
+/* Standard Gold Foil for Subheadings */
 .text-gold-foil {
-  background: linear-gradient(135deg, #783e00 0%, #d97706 20%, #ffd700 45%, #fff8c4 55%, #d97706 75%, #783500 100%);
+  background: linear-gradient(135deg, #6b3700 0%, #b46b02 22%, #f59e0b 45%, #fff6cf 55%, #c88107 75%, #6e3500 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  filter: drop-shadow(0 1px 1.5px rgba(100, 45, 0, 0.5));
+  filter: drop-shadow(0 1px 1.5px rgba(90, 40, 0, 0.5));
 }
 
 .text-gold-bright {
-  background: linear-gradient(135deg, #854000 0%, #ea580c 20%, #ffd700 50%, #fffde0 65%, #f59e0b 85%, #7c2d12 100%);
+  background: linear-gradient(135deg, #783800 0%, #d97706 20%, #ffd700 50%, #fffef0 65%, #f59e0b 85%, #78350f 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  filter: drop-shadow(0 1px 2px rgba(95, 40, 0, 0.6));
+  filter: drop-shadow(0 1px 2px rgba(80, 35, 0, 0.5));
 }
 
 .text-gold-subtle {
-  background: linear-gradient(135deg, #92400e 0%, #d97706 50%, #78350f 100%);
+  background: linear-gradient(135deg, #854d0e 0%, #b45309 50%, #78350f 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -91,39 +94,51 @@
 
 /* Gold border gradients */
 .border-gold-foil {
-  border-image: linear-gradient(135deg, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c) 1;
+  border-image: linear-gradient(135deg, #854f05, #d4a342, #fff6c7, #e1ad40, #94590b) 1;
 }
 
-/* Deckle Edge Paper Simulation (Optimized for 60fps buttery scrolling) */
+/* ================= LUXURY CARD & PAPER STYLING ================= */
+
+/* Deckle Edge Paper Simulation with Royal Depth */
 .deckle-paper {
-  background-color: #fffdf9;
+  background-color: #fffdfa;
   background-image: 
-    radial-gradient(circle at 50% 50%, rgba(245, 237, 222, 0.45) 0%, rgba(235, 224, 204, 0.25) 100%),
-    radial-gradient(circle at 10% 20%, rgba(212, 175, 55, 0.04) 0%, transparent 60%),
-    radial-gradient(circle at 90% 80%, rgba(212, 175, 55, 0.04) 0%, transparent 60%);
+    radial-gradient(circle at 50% 20%, rgba(254, 243, 199, 0.35) 0%, transparent 70%),
+    radial-gradient(circle at 10% 10%, rgba(212, 175, 55, 0.05) 0%, transparent 50%),
+    radial-gradient(circle at 90% 90%, rgba(212, 175, 55, 0.05) 0%, transparent 50%);
   box-shadow: 
-    0 4px 20px -2px rgba(35, 25, 10, 0.12),
-    0 1px 3px rgba(35, 25, 10, 0.08),
-    inset 0 0 40px rgba(212, 175, 55, 0.05);
+    0 12px 48px -10px rgba(25, 18, 10, 0.28),
+    0 2px 6px rgba(25, 18, 10, 0.12),
+    inset 0 0 60px rgba(212, 175, 55, 0.08);
   contain: layout style;
+}
+
+/* Gilded Royal Card surface */
+.card-royal-gilded {
+  background: linear-gradient(180deg, #ffffff 0%, #fdfbf5 50%, #f8f2e4 100%);
+  box-shadow: 
+    0 6px 24px -4px rgba(133, 79, 5, 0.16),
+    0 1px 4px rgba(133, 79, 5, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.95),
+    inset 0 0 16px rgba(212, 175, 55, 0.08);
 }
 
 /* Pearl Brooch Effect */
 .pearl-bead {
-  background: radial-gradient(circle at 35% 30%, #ffffff 0%, #fefcf7 30%, #ebe2d3 70%, #c4b59d 100%);
+  background: radial-gradient(circle at 35% 30%, #ffffff 0%, #fffbf2 30%, #ede3d2 70%, #c4b59d 100%);
   box-shadow: 
-    inset -1px -2px 4px rgba(160, 140, 110, 0.6),
-    inset 1px 2px 3px rgba(255, 255, 255, 0.9),
-    0 2px 5px rgba(0, 0, 0, 0.25);
+    inset -1px -2px 4px rgba(140, 115, 80, 0.65),
+    inset 1px 2px 3px rgba(255, 255, 255, 0.95),
+    0 3px 6px rgba(0, 0, 0, 0.3);
   transform: translateZ(0);
 }
 
 .pearl-brooch-core {
-  background: radial-gradient(circle at 35% 30%, #ffffff 0%, #fff9ec 25%, #eddcc2 60%, #baa380 90%, #8f7959 100%);
+  background: radial-gradient(circle at 35% 30%, #ffffff 0%, #fff7e4 25%, #edd4ad 60%, #b89a69 90%, #87693f 100%);
   box-shadow: 
-    inset -2px -4px 8px rgba(120, 95, 60, 0.5),
+    inset -2px -4px 8px rgba(100, 75, 40, 0.6),
     inset 2px 4px 6px rgba(255, 255, 255, 0.95),
-    0 6px 16px rgba(0, 0, 0, 0.35);
+    0 8px 20px rgba(0, 0, 0, 0.4);
   transform: translateZ(0);
 }
 
@@ -214,11 +229,11 @@
 @keyframes pulseSubtle {
   0%, 100% {
     transform: scale(1);
-    box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.35);
   }
   50% {
-    transform: scale(1.02);
-    box-shadow: 0 0 25px rgba(212, 175, 55, 0.6);
+    transform: scale(1.025);
+    box-shadow: 0 0 28px rgba(212, 175, 55, 0.65);
   }
 }
 
@@ -230,13 +245,16 @@
 ::-webkit-scrollbar {
   width: 5px;
 }
+
 ::-webkit-scrollbar-track {
   background: rgba(30, 25, 20, 0.05);
 }
+
 ::-webkit-scrollbar-thumb {
-  background: rgba(197, 160, 89, 0.4);
+  background: rgba(197, 160, 89, 0.45);
   border-radius: 9999px;
 }
+
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(197, 160, 89, 0.7);
+  background: rgba(197, 160, 89, 0.75);
 }

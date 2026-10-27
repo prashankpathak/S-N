@@ -1,12 +1,12 @@
 import React from 'react';
-import { GoldDivider } from './OrnateFrame';
+import { GoldDivider, CornerFlourish } from './OrnateFrame';
 
 export const AnnouncementSection: React.FC = () => {
   return (
-    <section className="relative my-6 px-2 text-center" id="invitation">
+    <section className="relative my-7 px-2 text-center" id="invitation">
       {/* Opening Invitation Salutation */}
       <div className="space-y-3 max-w-sm mx-auto">
-        <p className="font-cinzel text-[11px] tracking-[0.26em] text-[#8c6b2b] uppercase font-bold">
+        <p className="font-cinzel text-[11px] tracking-[0.28em] text-[#8c6b2b] uppercase font-bold">
           ✦ In The Name Of The Almighty ✦
         </p>
 
@@ -25,14 +25,21 @@ export const AnnouncementSection: React.FC = () => {
       {/* Groom & Bride Royal Presentation */}
       <div className="my-5 space-y-5">
         {/* Groom */}
-        <div className="space-y-1.5 p-4 sm:p-5 rounded-2xl bg-gradient-to-b from-[#ffffff] via-[#fdf8ee] to-[#f9eed7] border-2 border-[#b87a00]/70 shadow-[0_4px_16px_rgba(184,122,0,0.18)] max-w-sm mx-auto relative overflow-hidden">
-          <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-[#ffd700] to-transparent opacity-90" />
-          <span className="font-cinzel text-[10px] tracking-[0.25em] text-[#8a5200] uppercase font-bold block">
+        <div className="space-y-1.5 p-4 sm:p-5 rounded-2xl bg-gradient-to-b from-[#ffffff] via-[#fdf9f0] to-[#f8edd7] border-2 border-[#b87a00]/80 shadow-[0_8px_25px_rgba(184,122,0,0.2)] max-w-sm mx-auto relative overflow-hidden">
+          {/* Top shimmering gold ribbon */}
+          <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-[#ffd700] to-transparent opacity-95" />
+          <div className="absolute inset-1.5 border border-[#d4af37]/30 rounded-xl pointer-events-none" />
+          <CornerFlourish position="top-left" size={24} />
+          <CornerFlourish position="top-right" size={24} />
+
+          <span className="font-cinzel text-[10px] tracking-[0.26em] text-[#8a5200] uppercase font-bold block">
             The Groom
           </span>
+
           <h2 className="font-cormorant font-black text-3xl sm:text-4xl text-gold-shining tracking-tight leading-tight">
             Samarthya Solomon Selot
           </h2>
+
           <p className="font-cormorant italic text-sm sm:text-base text-[#4d3a22] font-semibold mt-1">
             (S/o Mrs. Anjani Selot &amp; Late Mr. Raveesh Selot)
           </p>
@@ -48,14 +55,21 @@ export const AnnouncementSection: React.FC = () => {
         </div>
 
         {/* Bride */}
-        <div className="space-y-1.5 p-4 sm:p-5 rounded-2xl bg-gradient-to-b from-[#ffffff] via-[#fdf8ee] to-[#f9eed7] border-2 border-[#b87a00]/70 shadow-[0_4px_16px_rgba(184,122,0,0.18)] max-w-sm mx-auto relative overflow-hidden">
-          <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-[#ffd700] to-transparent opacity-90" />
-          <span className="font-cinzel text-[10px] tracking-[0.25em] text-[#8a5200] uppercase font-bold block">
+        <div className="space-y-1.5 p-4 sm:p-5 rounded-2xl bg-gradient-to-b from-[#ffffff] via-[#fdf9f0] to-[#f8edd7] border-2 border-[#b87a00]/80 shadow-[0_8px_25px_rgba(184,122,0,0.2)] max-w-sm mx-auto relative overflow-hidden">
+          {/* Top shimmering gold ribbon */}
+          <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-[#ffd700] to-transparent opacity-95" />
+          <div className="absolute inset-1.5 border border-[#d4af37]/30 rounded-xl pointer-events-none" />
+          <CornerFlourish position="top-left" size={24} />
+          <CornerFlourish position="top-right" size={24} />
+
+          <span className="font-cinzel text-[10px] tracking-[0.26em] text-[#8a5200] uppercase font-bold block">
             The Bride
           </span>
+
           <h2 className="font-cormorant font-black text-3xl sm:text-4xl text-gold-shining tracking-tight leading-tight">
             Nikita Martin
           </h2>
+
           <p className="font-cormorant italic text-sm sm:text-base text-[#4d3a22] font-semibold mt-1">
             (D/o Mrs. Reena Martin &amp; Mr. Surendra Martin)
           </p>

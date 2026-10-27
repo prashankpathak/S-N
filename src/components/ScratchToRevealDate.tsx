@@ -369,7 +369,8 @@ export const ScratchToRevealDate: React.FC = () => {
         style={{ touchAction: 'none' }}
       >
         {/* ================= CARD CONTENT BENEATH (THE REVEAL) ================= */}
-        <div className="absolute inset-0 bg-gradient-to-br from-[#ffffff] via-[#fbf6ec] to-[#f4e8d3] p-4 flex flex-col items-center justify-center text-center">
+        <div className="absolute inset-0 bg-gradient-to-br from-[#ffffff] via-[#fdf9f0] to-[#f5ead5] p-4 flex flex-col items-center justify-center text-center">
+          <div className="absolute inset-1.5 border border-[#c5a059]/35 rounded-xl pointer-events-none" />
           <CornerFlourish position="top-left" size={26} />
           <CornerFlourish position="top-right" size={26} />
           <CornerFlourish position="bottom-left" size={26} />

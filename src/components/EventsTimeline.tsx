@@ -92,10 +92,10 @@ export const EventsTimeline: React.FC = () => {
         <span className="font-cinzel text-[10px] tracking-[0.28em] text-[#8c6b2b] uppercase font-bold">
           Celebration Timeline
         </span>
-        <h3 className="font-cormorant font-bold text-3xl sm:text-4xl text-gold-foil mt-1">
+        <h3 className="font-cormorant font-bold text-3xl sm:text-4xl text-gold-radiant mt-1">
           Events &amp; Itinerary
         </h3>
-        <p className="font-cormorant italic text-sm text-[#5a4830] mt-1">
+        <p className="font-cormorant italic text-sm text-[#5a4830] mt-1 font-medium">
           Each sacred moment marked with joy, music, and divine blessings
         </p>
       </div>
@@ -105,49 +105,52 @@ export const EventsTimeline: React.FC = () => {
         {weddingEventsData.map((event) => (
           <div
             key={event.id}
-            className="relative rounded-2xl p-5 bg-gradient-to-b from-[#ffffff] via-[#fffdf9] to-[#faf5eb] border border-[#c5a059]/40 shadow-md transition-all duration-300 hover:shadow-lg"
+            className="relative rounded-2xl p-5 bg-gradient-to-b from-[#ffffff] via-[#fefbf6] to-[#f8f1e2] border-2 border-[#b87a00]/45 shadow-[0_6px_22px_rgba(184,122,0,0.14)] transition-all duration-300 hover:shadow-[0_10px_30px_rgba(184,122,0,0.22)] overflow-hidden"
           >
+            {/* Top gold accent ribbon */}
+            <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-[#ffd700] to-transparent" />
+
             {/* Top Row: Event Number & Title */}
             <div className="flex items-start justify-between gap-3">
               <div>
-                <span className="font-cinzel text-[10px] tracking-[0.22em] text-[#8c6b2b] uppercase font-bold block">
+                <span className="font-cinzel text-[10px] tracking-[0.24em] text-[#8a5200] uppercase font-bold block">
                   Event {event.number}
                 </span>
-                <h4 className="font-cormorant font-bold text-xl sm:text-2xl text-[#2d2215] leading-tight mt-0.5">
+                <h4 className="font-cormorant font-bold text-xl sm:text-2xl text-[#241a0e] leading-tight mt-0.5">
                   {event.title}
                 </h4>
                 {event.subTitle && (
-                  <p className="font-cormorant italic text-xs text-[#705a39]">
+                  <p className="font-cormorant italic text-xs text-[#735832] font-semibold">
                     {event.subTitle}
                   </p>
                 )}
               </div>
-              <div className="w-8 h-8 rounded-full border border-[#c5a059]/50 flex items-center justify-center shrink-0 bg-[#faf4e6] text-[#8c6b2b] font-cinzel font-bold text-xs shadow-inner">
+              <div className="w-9 h-9 rounded-full border-2 border-[#b87a00]/70 flex items-center justify-center shrink-0 bg-gradient-to-b from-[#fffbe0] to-[#f5e4bd] text-gold-shining font-cinzel font-black text-xs shadow-[0_2px_8px_rgba(184,122,0,0.25)]">
                 {event.number}
               </div>
             </div>
 
-            <GoldDivider className="my-3 opacity-50" />
+            <GoldDivider className="my-3 opacity-60" />
 
             {/* Date & Time */}
-            <div className="space-y-1.5 text-xs text-[#3f3120]">
-              <div className="flex items-center gap-2 font-medium">
+            <div className="space-y-2 text-xs text-[#382b18]">
+              <div className="flex items-center gap-2 font-semibold">
                 <Calendar className="w-4 h-4 text-[#8c6b2b] shrink-0" />
-                <span className="font-serif">{event.date}</span>
+                <span className="font-serif text-[13px]">{event.date}</span>
               </div>
               <div className="flex items-center gap-2">
                 <Clock className="w-4 h-4 text-[#8c6b2b] shrink-0" />
-                <span className="font-cinzel text-[11px] font-semibold text-[#8c6b2b]">
+                <span className="font-cinzel text-[11px] font-bold text-[#8a5200]">
                   {event.time}
                 </span>
               </div>
-              <div className="flex items-start gap-2 pt-1">
+              <div className="flex items-start gap-2 pt-0.5">
                 <MapPin className="w-4 h-4 text-[#8c6b2b] shrink-0 mt-0.5" />
                 <div>
-                  <strong className="font-medium text-[#291f13] block">
+                  <strong className="font-bold text-[#241a0e] text-[13px] block">
                     {event.venue}
                   </strong>
-                  <span className="text-[11px] text-[#6b563b] leading-relaxed block">
+                  <span className="text-[11px] text-[#634e32] leading-relaxed block font-medium">
                     {event.venueAddress}
                   </span>
                 </div>
@@ -156,7 +159,7 @@ export const EventsTimeline: React.FC = () => {
 
             {/* Optional Note */}
             {event.note && (
-              <p className="font-cormorant italic text-xs text-[#6e5836] bg-[#fbf8f0] p-2.5 rounded-lg border border-[#e8dcbe] mt-3">
+              <p className="font-cormorant italic text-xs text-[#594425] bg-[#fdf9f0] p-2.5 rounded-xl border border-[#e5d5b0] mt-3 font-medium">
                 &ldquo;{event.note}&rdquo;
               </p>
             )}
@@ -167,7 +170,7 @@ export const EventsTimeline: React.FC = () => {
                 href={event.googleMapsUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex-1 min-h-[40px] px-3 py-1.5 rounded-lg border border-[#c5a059]/60 bg-gradient-to-r from-[#faf6ec] to-[#f4ebe0] hover:bg-[#ebdcc0] text-[#41311b] font-cinzel text-[10px] font-semibold tracking-wider flex items-center justify-center gap-1.5 active:scale-95 transition-transform"
+                className="flex-1 min-h-[40px] px-3 py-1.5 rounded-xl border-2 border-[#c5a059]/60 bg-gradient-to-r from-[#faf6ec] to-[#f4ebe0] hover:bg-[#ebdcc0] text-[#3d2c14] font-cinzel text-[10px] font-bold tracking-wider flex items-center justify-center gap-1.5 active:scale-95 transition-transform shadow-xs"
               >
                 <MapPin className="w-3.5 h-3.5 text-[#8c6b2b]" />
                 <span>View Map</span>
@@ -178,7 +181,7 @@ export const EventsTimeline: React.FC = () => {
                 href={getGoogleCalendarUrl(event)}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex-1 min-h-[40px] px-3 py-1.5 rounded-lg border border-[#c5a059]/60 bg-gradient-to-r from-[#faf6ec] to-[#f4ebe0] hover:bg-[#ebdcc0] text-[#41311b] font-cinzel text-[10px] font-semibold tracking-wider flex items-center justify-center gap-1.5 active:scale-95 transition-transform"
+                className="flex-1 min-h-[40px] px-3 py-1.5 rounded-xl border-2 border-[#c5a059]/60 bg-gradient-to-r from-[#faf6ec] to-[#f4ebe0] hover:bg-[#ebdcc0] text-[#3d2c14] font-cinzel text-[10px] font-bold tracking-wider flex items-center justify-center gap-1.5 active:scale-95 transition-transform shadow-xs"
                 title="Add to Google Calendar"
               >
                 <Calendar className="w-3.5 h-3.5 text-[#8c6b2b]" />
@@ -191,7 +194,7 @@ export const EventsTimeline: React.FC = () => {
                   setCopiedEventId(event.id);
                   setTimeout(() => setCopiedEventId(null), 2000);
                 }}
-                className="min-h-[40px] px-2.5 py-1.5 rounded-lg border border-[#c5a059]/40 bg-white hover:bg-[#fbf7ee] text-[#41311b] flex items-center justify-center active:scale-95 transition-transform"
+                className="min-h-[40px] px-2.5 py-1.5 rounded-xl border-2 border-[#c5a059]/50 bg-white hover:bg-[#fbf7ee] text-[#3d2c14] flex items-center justify-center active:scale-95 transition-transform shadow-xs cursor-pointer"
                 title="Download .ics file for Apple / Outlook Calendar"
                 aria-label={`Download .ics file for ${event.title}`}
               >
@@ -209,7 +212,7 @@ export const EventsTimeline: React.FC = () => {
         <div className="pt-2 text-center">
           <button
             onClick={handleDownloadAllIcs}
-            className="w-full py-2.5 px-4 rounded-xl border border-[#c5a059] bg-[#fffdfa] hover:bg-[#fcf8ef] text-[#42321c] font-cinzel text-xs font-semibold tracking-wider shadow-sm flex items-center justify-center gap-2 active:scale-98 transition-transform"
+            className="w-full py-2.5 px-4 rounded-xl border-2 border-[#c5a059] bg-gradient-to-b from-[#ffffff] to-[#faf5eb] hover:bg-[#fcf8ef] text-[#3b2a12] font-cinzel text-xs font-bold tracking-wider shadow-[0_4px_16px_rgba(184,122,0,0.15)] flex items-center justify-center gap-2 active:scale-98 transition-transform cursor-pointer"
           >
             <Download className="w-4 h-4 text-[#8c6b2b]" />
             <span>Download All 5 Events (.ics Calendar)</span>
