@@ -43,81 +43,18 @@ export const CountdownSection: React.FC = () => {
 
   return (
     <section className="relative my-8 py-4 px-3 flex flex-col items-center text-center">
-      {/* ================= PEARL NECKLACE ILLUSTRATION AROUND DATE ================= */}
-      <div className="relative w-full max-w-[320px] mx-auto py-6 px-4">
-        {/* SVG Pearl Necklace Frame */}
-        <div className="relative flex items-center justify-center">
-          <svg
-            viewBox="0 0 340 160"
-            className="w-full h-auto drop-shadow-md"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <defs>
-              <radialGradient id="pearlShine" cx="35%" cy="30%" r="65%">
-                <stop offset="0%" stopColor="#ffffff" />
-                <stop offset="40%" stopColor="#fffcf5" />
-                <stop offset="75%" stopColor="#ede3d1" />
-                <stop offset="100%" stopColor="#c5b59a" />
-              </radialGradient>
-              <linearGradient id="silkRibbon" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#bf953f" />
-                <stop offset="50%" stopColor="#fef08a" />
-                <stop offset="100%" stopColor="#aa771c" />
-              </linearGradient>
-            </defs>
-
-            {/* Pearl necklace arrangement without overlapping line */}
-
-            {/* Individual Lustrous Pearls arranged along the oval necklace curve */}
-            {(() => {
-              const pearls = [];
-              const count = 30;
-              const a = 145; // x-radius
-              const b = 50;  // y-radius
-              const cx = 170;
-              const cy = 80;
-
-              for (let i = 0; i < count; i++) {
-                const angle = (i * 2 * Math.PI) / count;
-                const px = cx + a * Math.cos(angle);
-                const py = cy + b * Math.sin(angle);
-                const isCenterTop = Math.abs(px - cx) < 15 && py < cy;
-                const isCenterBottom = Math.abs(px - cx) < 15 && py > cy;
-                const r = isCenterBottom ? 6.5 : isCenterTop ? 5.5 : 4.5;
-
-                pearls.push(
-                  <g key={i}>
-                    {/* Pearl shadow */}
-                    <circle cx={px + 0.8} cy={py + 1.2} r={r} fill="rgba(0,0,0,0.15)" />
-                    {/* Pearl body with pearlescent gradient */}
-                    <circle cx={px} cy={py} r={r} fill="url(#pearlShine)" stroke="#d4af37" strokeWidth="0.5" />
-                    {/* Tiny specular highlight */}
-                    <circle cx={px - r * 0.3} cy={py - r * 0.3} r={r * 0.28} fill="#ffffff" opacity="0.9" />
-                  </g>
-                );
-              }
-              return pearls;
-            })()}
-
-            {/* Gold Pendant clasp at bottom center */}
-            <polygon points="170,134 175,142 170,150 165,142" fill="url(#silkRibbon)" stroke="#8c6b2b" strokeWidth="0.5" />
-            <circle cx="170" cy="142" r="1.5" fill="#fff" />
-          </svg>
-
-          {/* Enclosed Date Text within the Pearl Necklace */}
-          <div className="absolute inset-0 flex flex-col items-center justify-center px-6">
-            <span className="font-cinzel text-[10px] tracking-[0.28em] text-[#8c6b2b] uppercase font-semibold">
-              The Wedding Day
-            </span>
-            <span className="font-cormorant font-bold text-2xl sm:text-3xl text-gold-foil tracking-wide mt-0.5">
-              13 November 2026
-            </span>
-            <span className="font-cormorant italic text-xs text-[#6e5830]">
-              As the clock strikes 4:00 PM IST
-            </span>
-          </div>
+      {/* Section Header */}
+      <div className="max-w-sm mx-auto mb-4">
+        <div className="flex items-center justify-center gap-2 mb-1">
+          <span className="h-[1px] w-8 bg-gradient-to-r from-transparent to-[#b8860b]" />
+          <span className="font-cinzel text-[10px] tracking-[0.28em] text-[#8c6b2b] uppercase font-bold">
+            The Auspicious Countdown
+          </span>
+          <span className="h-[1px] w-8 bg-gradient-to-l from-transparent to-[#b8860b]" />
         </div>
+        <h3 className="font-cormorant font-bold text-2xl sm:text-3xl text-gold-foil">
+          Counting Down To The Sacred Vows
+        </h3>
       </div>
 
       {/* ================= LIVE COUNTDOWN UNITS ================= */}

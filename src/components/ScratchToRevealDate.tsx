@@ -11,9 +11,18 @@ export const ScratchToRevealDate: React.FC = () => {
   const lastCheckTimeRef = useRef<number>(0);
   const checkRafRef = useRef<number | null>(null);
 
-  const [isRevealed, setIsRevealed] = useState(false);
+  const [isRevealed, setIsRevealed] = useState(() => {
+    try {
+      return sessionStorage.getItem('wedding_date_revealed') === 'true';
+    } catch {
+      return false;
+    }
+  });
+  const isRevealedRef = useRef(isRevealed);
+  isRevealedRef.current = isRevealed;
+
   const [isFading, setIsFading] = useState(false);
-  const [scratchProgress, setScratchProgress] = useState(0);
+  const [scratchProgress, setScratchProgress] = useState(isRevealed ? 100 : 0);
 
   // Sweet celebratory chime on reveal using Web Audio API
   const playRevealChime = useCallback(() => {
@@ -48,7 +57,9 @@ export const ScratchToRevealDate: React.FC = () => {
   }, []);
 
   // Initialize canvas with luxurious gold foil coating
-  const initCanvas = useCallback(() => {
+  const initCanvas = useCallback((force = false) => {
+    if (isRevealedRef.current && !force) return;
+
     const canvas = canvasRef.current;
     const container = containerRef.current;
     if (!canvas || !container) return;
@@ -66,7 +77,8 @@ export const ScratchToRevealDate: React.FC = () => {
     const ctx = canvas.getContext('2d', { willReadFrequently: true });
     if (!ctx) return;
     ctx.setTransform(1, 0, 0, 1, 0, 0); // reset transform
-    ctx.scale(dpr, dpr);
+    ctx.clearRect(0, 0, canvas.width, canvas.height); // clear entire buffer cleanly
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0); // apply DPR scaling cleanly
 
     // Reset composite mode
     ctx.globalCompositeOperation = 'source-over';
@@ -133,17 +145,21 @@ export const ScratchToRevealDate: React.FC = () => {
       offscreenCanvasRef.current.height = 25;
     }
 
-    setIsRevealed(false);
-    setIsFading(false);
-    setScratchProgress(0);
-    lastPointRef.current = null;
-    isScratchingRef.current = false;
+    if (force) {
+      setIsRevealed(false);
+      setIsFading(false);
+      setScratchProgress(0);
+      lastPointRef.current = null;
+      isScratchingRef.current = false;
+    }
   }, []);
 
   useEffect(() => {
-    initCanvas();
+    if (!isRevealedRef.current) {
+      initCanvas();
+    }
     const handleResize = () => {
-      if (!isRevealed) {
+      if (!isRevealedRef.current) {
         initCanvas();
       }
     };
@@ -154,12 +170,13 @@ export const ScratchToRevealDate: React.FC = () => {
         cancelAnimationFrame(checkRafRef.current);
       }
     };
-  }, [initCanvas, isRevealed]);
+  }, [initCanvas]);
 
   // Ultra-fast progress checker using a downsampled 40x25 offscreen buffer (1,000 samples vs 250,000)
   const checkProgressFast = useCallback(() => {
+    if (isRevealedRef.current || isFading) return;
     const canvas = canvasRef.current;
-    if (!canvas || isRevealed || isFading) return;
+    if (!canvas) return;
 
     const offscreen = offscreenCanvasRef.current;
     if (!offscreen) return;
@@ -190,20 +207,26 @@ export const ScratchToRevealDate: React.FC = () => {
     if (ratio >= 35) {
       triggerSmoothReveal();
     }
-  }, [isRevealed, isFading]);
+  }, [isFading]);
 
   // Smooth fade-out reveal animation
   const triggerSmoothReveal = useCallback(() => {
-    if (isFading || isRevealed) return;
+    if (isFading || isRevealedRef.current) return;
     setIsFading(true);
     playRevealChime();
     setScratchProgress(100);
 
     setTimeout(() => {
+      isRevealedRef.current = true;
       setIsRevealed(true);
       setIsFading(false);
+      try {
+        sessionStorage.setItem('wedding_date_revealed', 'true');
+      } catch {
+        // ignore
+      }
     }, 380);
-  }, [isFading, isRevealed, playRevealChime]);
+  }, [isFading, playRevealChime]);
 
   // Continuous stroke interpolation for buttery smooth 60fps / 120fps scratching
   const scratchAt = (clientX: number, clientY: number) => {
@@ -217,31 +240,31 @@ export const ScratchToRevealDate: React.FC = () => {
     const x = clientX - rect.left;
     const y = clientY - rect.top;
 
-    const dpr = Math.min(window.devicePixelRatio || 1, 2);
-
+    // IMPORTANT: Context already has ctx.setTransform(dpr, 0, 0, dpr, 0, 0) active.
+    // Coordinates and lineWidth must be in standard CSS pixels so they accurately track the touch/cursor.
     ctx.save();
     ctx.globalCompositeOperation = 'destination-out';
     ctx.lineCap = 'round';
     ctx.lineJoin = 'round';
-    ctx.lineWidth = 42 * dpr;
+    ctx.lineWidth = 44;
 
     if (lastPointRef.current) {
       ctx.beginPath();
-      ctx.moveTo(lastPointRef.current.x * dpr, lastPointRef.current.y * dpr);
-      ctx.lineTo(x * dpr, y * dpr);
+      ctx.moveTo(lastPointRef.current.x, lastPointRef.current.y);
+      ctx.lineTo(x, y);
       ctx.stroke();
     } else {
       ctx.beginPath();
-      ctx.arc(x * dpr, y * dpr, 21 * dpr, 0, Math.PI * 2);
+      ctx.arc(x, y, 22, 0, Math.PI * 2);
       ctx.fill();
     }
     ctx.restore();
 
     lastPointRef.current = { x, y };
 
-    // Throttle progress check to at most once every 350ms to ensure 100% 60fps/120fps interaction
+    // Responsive progress check (120ms throttle for instant reaction)
     const now = performance.now();
-    if (now - lastCheckTimeRef.current > 350) {
+    if (now - lastCheckTimeRef.current > 120) {
       lastCheckTimeRef.current = now;
       if (checkRafRef.current) cancelAnimationFrame(checkRafRef.current);
       checkRafRef.current = requestAnimationFrame(checkProgressFast);
@@ -251,10 +274,11 @@ export const ScratchToRevealDate: React.FC = () => {
   // Unified Pointer Events (works flawlessly on mobile touch, stylus, and desktop mouse)
   const handlePointerDown = (e: React.PointerEvent<HTMLCanvasElement>) => {
     if (isRevealed || isFading) return;
+    if (e.button !== 0 && e.pointerType === 'mouse') return;
     try {
       e.currentTarget.setPointerCapture(e.pointerId);
     } catch {
-      // ignore if pointer capture unsupported
+      // ignore
     }
     isScratchingRef.current = true;
     lastPointRef.current = null;
@@ -277,9 +301,49 @@ export const ScratchToRevealDate: React.FC = () => {
     } catch {
       // ignore
     }
-    // Always do one instant check on release
     checkProgressFast();
   };
+
+  // Window global release listener so pointer never gets stuck if dragged outside
+  useEffect(() => {
+    const handleGlobalRelease = () => {
+      if (isScratchingRef.current) {
+        isScratchingRef.current = false;
+        lastPointRef.current = null;
+        checkProgressFast();
+      }
+    };
+    window.addEventListener('pointerup', handleGlobalRelease);
+    window.addEventListener('pointercancel', handleGlobalRelease);
+    return () => {
+      window.removeEventListener('pointerup', handleGlobalRelease);
+      window.removeEventListener('pointercancel', handleGlobalRelease);
+    };
+  }, [checkProgressFast]);
+
+  // Reset scratch card to pristine condition for Scratch Again
+  const handleScratchAgain = useCallback(() => {
+    if (checkRafRef.current) {
+      cancelAnimationFrame(checkRafRef.current);
+      checkRafRef.current = null;
+    }
+    try {
+      sessionStorage.removeItem('wedding_date_revealed');
+    } catch {
+      // ignore
+    }
+    isRevealedRef.current = false;
+    setIsFading(false);
+    setIsRevealed(false);
+    setScratchProgress(0);
+    lastPointRef.current = null;
+    isScratchingRef.current = false;
+
+    // Use requestAnimationFrame to ensure the canvas is re-rendered and ready
+    requestAnimationFrame(() => {
+      initCanvas(true);
+    });
+  }, [initCanvas]);
 
   return (
     <section className="relative my-7 px-2 text-center" id="scratch-date">
@@ -311,45 +375,38 @@ export const ScratchToRevealDate: React.FC = () => {
           <CornerFlourish position="bottom-left" size={26} />
           <CornerFlourish position="bottom-right" size={26} />
 
-          <span className="font-cinzel text-[9px] tracking-[0.28em] text-[#8c6b2b] uppercase font-bold block mb-1">
+          <span className="font-cinzel text-[10px] tracking-[0.28em] text-[#8c6b2b] uppercase font-bold block mb-1">
             ✦ Save The Auspicious Date ✦
           </span>
 
-          <div className="my-1">
-            <span className="font-cormorant font-black text-2xl sm:text-3xl text-gold-shining tracking-wide block leading-tight">
+          <div className="my-2">
+            <span className="font-cormorant font-black text-3xl sm:text-4xl text-gold-shining tracking-wide block leading-tight">
               Friday, 13 November 2026
-            </span>
-            <span className="font-cinzel text-xs font-bold text-[#8a5b17] tracking-widest block mt-0.5">
-              As the clock strikes 4:00 PM IST
             </span>
           </div>
 
-          <p className="font-cormorant text-xs sm:text-sm text-[#382b18] font-medium leading-tight">
+          <p className="font-cormorant text-xs sm:text-sm text-[#382b18] font-medium leading-tight mt-1">
             Disciples Church of Christ, CNI
             <br />
             <span className="text-[11px] text-[#6b5539]">Nagrath Chowk, Jabalpur (M.P.)</span>
           </p>
-
-          <span className="font-vibes text-xl text-gold-shining mt-1">
-            Samarthya &amp; Nikita
-          </span>
         </div>
 
-        {/* ================= CANVAS OVERLAY (THE SCRATCH FOIL) ================= */}
-        {!isRevealed && (
-          <canvas
-            ref={canvasRef}
-            className={`absolute inset-0 cursor-pointer touch-none z-10 transition-opacity duration-350 ease-out ${
-              isFading ? 'opacity-0 pointer-events-none' : 'opacity-100'
-            }`}
-            style={{ willChange: 'opacity, transform' }}
-            onPointerDown={handlePointerDown}
-            onPointerMove={handlePointerMove}
-            onPointerUp={handlePointerUp}
-            onPointerCancel={handlePointerUp}
-            aria-label="Interactive scratch card to reveal wedding date"
-          />
-        )}
+        {/* ================= CANVAS OVERLAY (THE SCRATCH FOIL) - ALWAYS MOUNTED FOR INSTANT SCRATCH AGAIN ================= */}
+        <canvas
+          ref={canvasRef}
+          className={`absolute inset-0 cursor-pointer touch-none z-10 transition-opacity duration-350 ease-out ${
+            isRevealed || isFading
+              ? 'opacity-0 pointer-events-none'
+              : 'opacity-100 pointer-events-auto'
+          }`}
+          style={{ willChange: 'opacity, transform', touchAction: 'none' }}
+          onPointerDown={handlePointerDown}
+          onPointerMove={handlePointerMove}
+          onPointerUp={handlePointerUp}
+          onPointerCancel={handlePointerUp}
+          aria-label="Interactive scratch card to reveal wedding date"
+        />
       </div>
 
       {/* Action Controls & Hint */}
@@ -366,7 +423,7 @@ export const ScratchToRevealDate: React.FC = () => {
             </span>
             <button
               onClick={triggerSmoothReveal}
-              className="py-1.5 px-3 rounded-lg border border-[#c5a059] bg-[#fffdf9] hover:bg-[#f6ebd7] text-[#4d391d] font-cinzel text-[10px] font-bold tracking-wider uppercase flex items-center gap-1.5 shadow-xs active:scale-95 transition-transform"
+              className="py-1.5 px-3 rounded-lg border border-[#c5a059] bg-[#fffdf9] hover:bg-[#f6ebd7] text-[#4d391d] font-cinzel text-[10px] font-bold tracking-wider uppercase flex items-center gap-1.5 shadow-xs active:scale-95 transition-transform cursor-pointer"
             >
               <Sparkles className="w-3 h-3 text-[#b87a00]" />
               <span>Tap to Reveal</span>
@@ -379,8 +436,8 @@ export const ScratchToRevealDate: React.FC = () => {
               <span>Date Revealed!</span>
             </span>
             <button
-              onClick={initCanvas}
-              className="py-1 px-2.5 rounded-lg border border-[#c5a059]/50 bg-white hover:bg-[#fff9ed] text-[#4d391d] font-cinzel text-[9px] font-bold tracking-wider uppercase flex items-center gap-1 shadow-xs active:scale-95 transition-transform"
+              onClick={handleScratchAgain}
+              className="py-1 px-2.5 rounded-lg border border-[#c5a059]/50 bg-white hover:bg-[#fff9ed] text-[#4d391d] font-cinzel text-[9px] font-bold tracking-wider uppercase flex items-center gap-1 shadow-xs active:scale-95 transition-transform cursor-pointer"
               title="Scratch again"
             >
               <RefreshCw className="w-3 h-3 text-[#8c6b2b]" />
