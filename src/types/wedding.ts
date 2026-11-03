@@ -10,15 +10,7 @@ export interface WeddingEvent {
   venue: string;
   venueAddress: string;
   googleMapsUrl: string;
-  dressCode?: {
-    theme: string;
-    description: string;
-    swatches: {
-      name: string;
-      hex: string;
-      sparkle?: boolean;
-    }[];
-  };
+  dressCode?: string;
   note?: string;
 }
 

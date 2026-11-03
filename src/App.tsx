@@ -4,11 +4,12 @@ import { AudioControls } from './components/AudioControls';
 import { HolyScriptureSection } from './components/HolyScriptureSection';
 import { ScratchToRevealDate } from './components/ScratchToRevealDate';
 import { AnnouncementSection } from './components/AnnouncementSection';
+import { PreWeddingGallery } from './components/PreWeddingGallery';
 import { CountdownSection } from './components/CountdownSection';
 import { EventsTimeline } from './components/EventsTimeline';
 import { FamilyBlessingsSection } from './components/FamilyBlessingsSection';
 import { CornerFlourish, GoldDivider, MonogramBadge } from './components/OrnateFrame';
-import { Calendar, Heart, Sparkles, MapPin, Phone } from 'lucide-react';
+import { Calendar, Heart, Sparkles, MapPin, Camera } from 'lucide-react';
 
 export default function App() {
   const [isGateOpen, setIsGateOpen] = useState(false);
@@ -86,17 +87,22 @@ export default function App() {
 
               <GoldDivider className="my-6 opacity-80" />
 
-              {/* ================= 4. COUNTDOWN ================= */}
+              {/* ================= 4. PRE-WEDDING MEMORIES GALLERY ================= */}
+              <PreWeddingGallery />
+
+              <GoldDivider className="my-6 opacity-80" />
+
+              {/* ================= 5. COUNTDOWN ================= */}
               <CountdownSection />
 
               <GoldDivider className="my-6 opacity-80" />
 
-              {/* ================= 5. EVENTS TIMELINE (NO DRESS CODE) ================= */}
+              {/* ================= 6. EVENTS TIMELINE ================= */}
               <EventsTimeline />
 
               <GoldDivider className="my-6 opacity-80" />
 
-              {/* ================= 6. FAMILY BLESSINGS & CONTACT ================= */}
+              {/* ================= 7. FAMILY BLESSINGS & CONTACT ================= */}
               <FamilyBlessingsSection />
 
               {/* Footer Note */}
@@ -121,11 +127,11 @@ export default function App() {
         {isGateOpen && (
           <nav
             aria-label="Quick wedding navigation"
-            className="fixed bottom-0 left-0 right-0 z-40 max-w-[480px] mx-auto bg-[#fffdfa]/95 backdrop-blur-md border-t-2 border-[#c5a059]/45 shadow-[0_-8px_30px_rgba(0,0,0,0.18)] px-3 py-2 flex items-center justify-around"
+            className="fixed bottom-0 left-0 right-0 z-40 max-w-[480px] mx-auto bg-[#fffdfa]/95 backdrop-blur-md border-t-2 border-[#c5a059]/45 shadow-[0_-8px_30px_rgba(0,0,0,0.18)] px-2 py-2 flex items-center justify-around"
           >
             <button
               onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-              className="flex flex-col items-center gap-1 min-w-[56px] py-1 text-[#8c6b2b] hover:text-[#423218] active:scale-95 transition-transform"
+              className="flex flex-col items-center gap-1 min-w-[50px] py-1 text-[#8c6b2b] hover:text-[#423218] active:scale-95 transition-transform"
             >
               <Sparkles className="w-4 h-4 text-[#b87a00]" />
               <span className="font-cinzel text-[9px] tracking-wider uppercase font-bold">
@@ -134,7 +140,7 @@ export default function App() {
             </button>
             <button
               onClick={() => scrollToSection('scratch-date')}
-              className="flex flex-col items-center gap-1 min-w-[56px] py-1 text-[#8c6b2b] hover:text-[#423218] active:scale-95 transition-transform"
+              className="flex flex-col items-center gap-1 min-w-[50px] py-1 text-[#8c6b2b] hover:text-[#423218] active:scale-95 transition-transform"
             >
               <Sparkles className="w-4 h-4 text-[#b87a00]" />
               <span className="font-cinzel text-[9px] tracking-wider uppercase font-bold">
@@ -142,8 +148,17 @@ export default function App() {
               </span>
             </button>
             <button
+              onClick={() => scrollToSection('memories')}
+              className="flex flex-col items-center gap-1 min-w-[50px] py-1 text-[#8c6b2b] hover:text-[#423218] active:scale-95 transition-transform"
+            >
+              <Camera className="w-4 h-4 text-[#b87a00]" />
+              <span className="font-cinzel text-[9px] tracking-wider uppercase font-bold">
+                Memories
+              </span>
+            </button>
+            <button
               onClick={() => scrollToSection('itinerary')}
-              className="flex flex-col items-center gap-1 min-w-[56px] py-1 text-[#8c6b2b] hover:text-[#423218] active:scale-95 transition-transform"
+              className="flex flex-col items-center gap-1 min-w-[50px] py-1 text-[#8c6b2b] hover:text-[#423218] active:scale-95 transition-transform"
             >
               <Calendar className="w-4 h-4 text-[#b87a00]" />
               <span className="font-cinzel text-[9px] tracking-wider uppercase font-bold">
@@ -152,27 +167,18 @@ export default function App() {
             </button>
             <button
               onClick={() => scrollToSection('blessings')}
-              className="flex flex-col items-center gap-1 min-w-[56px] py-1 text-[#8c6b2b] hover:text-[#423218] active:scale-95 transition-transform"
+              className="flex flex-col items-center gap-1 min-w-[50px] py-1 text-[#8c6b2b] hover:text-[#423218] active:scale-95 transition-transform"
             >
               <Heart className="w-4 h-4 text-[#b87a00]" />
               <span className="font-cinzel text-[9px] tracking-wider uppercase font-bold">
                 Blessings
               </span>
             </button>
-            <button
-              onClick={() => scrollToSection('blessings')}
-              className="flex flex-col items-center gap-1 min-w-[56px] py-1 text-[#8c6b2b] hover:text-[#423218] active:scale-95 transition-transform"
-            >
-              <Phone className="w-4 h-4 text-[#b87a00]" />
-              <span className="font-cinzel text-[9px] tracking-wider uppercase font-bold">
-                Contact
-              </span>
-            </button>
             <a
               href="https://maps.google.com/?q=Disciples+Church+of+Christ+Nagrath+Chowk+Jabalpur"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex flex-col items-center gap-1 min-w-[56px] py-1 text-[#8c6b2b] hover:text-[#423218] active:scale-95 transition-transform"
+              className="flex flex-col items-center gap-1 min-w-[50px] py-1 text-[#8c6b2b] hover:text-[#423218] active:scale-95 transition-transform"
             >
               <MapPin className="w-4 h-4 text-[#b87a00]" />
               <span className="font-cinzel text-[9px] tracking-wider uppercase font-bold">

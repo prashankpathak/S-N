@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { WeddingEvent } from '../types/wedding';
 import { downloadIcsFile, getGoogleCalendarUrl } from '../utils/calendar';
 import { GoldDivider } from './OrnateFrame';
-import { Calendar, MapPin, Clock, ExternalLink, Download, Check } from 'lucide-react';
+import { Calendar, MapPin, Clock, ExternalLink, Download, Check, Sparkles } from 'lucide-react';
 
 const weddingEventsData: WeddingEvent[] = [
   {
@@ -31,6 +31,7 @@ const weddingEventsData: WeddingEvent[] = [
     venue: 'West Elizey, Shawn Elizey',
     venueAddress: 'Jabalpur, Madhya Pradesh',
     googleMapsUrl: 'https://maps.google.com/?q=Shawn+Elizey+Jabalpur',
+    dressCode: 'Yellow',
   },
   {
     id: 'event-sangeet',
@@ -44,6 +45,7 @@ const weddingEventsData: WeddingEvent[] = [
     venue: 'East Elizey, Shawn Elizey',
     venueAddress: 'Jabalpur, Madhya Pradesh',
     googleMapsUrl: 'https://maps.google.com/?q=Shawn+Elizey+Jabalpur',
+    dressCode: 'Sparkle & Shimmer',
   },
   {
     id: 'event-matrimony',
@@ -155,6 +157,19 @@ export const EventsTimeline: React.FC = () => {
                   </span>
                 </div>
               </div>
+              {event.dressCode && (
+                <div className="flex items-center gap-2 pt-1 border-t border-[#f0e4cc]/80">
+                  <Sparkles className="w-4 h-4 text-[#8c6b2b] shrink-0" />
+                  <div className="flex items-baseline gap-1.5">
+                    <span className="font-cinzel text-[10px] tracking-wider uppercase font-bold text-[#8a5200]">
+                      Dress Code:
+                    </span>
+                    <span className="font-cormorant font-bold text-sm text-[#241a0e]">
+                      {event.dressCode}
+                    </span>
+                  </div>
+                </div>
+              )}
             </div>
 
             {/* Optional Note */}
