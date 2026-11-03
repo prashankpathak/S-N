@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { weddingAudio } from '../utils/audio';
+import { triggerGateOpenConfetti } from '../utils/confetti';
 import { CornerFlourish, RoyalCross } from './OrnateFrame';
 
 interface GateCoverProps {
@@ -16,6 +17,9 @@ export const GateCover: React.FC<GateCoverProps> = ({ isOpen, onOpen }) => {
     setIsAnimating(true);
     // Smoothly start the user's flute background music immediately on tap
     weddingAudio.playBackgroundMusic();
+
+    // Trigger celebratory gold and cream confetti shower
+    triggerGateOpenConfetti();
 
     setTimeout(() => {
       onOpen();
